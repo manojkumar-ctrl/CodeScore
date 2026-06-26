@@ -1,0 +1,187 @@
+@import url('https://api.fontshare.com/v2/css?f[]=ranade@300,400,500,700&display=swap');
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: 'Ranade', sans-serif;
+  --font-heading: var(--font-josefin-sans), sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  /* Pure White */
+  --foreground: oklch(0 0 0);
+  /* Pure Black */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0 0 0);
+  /* Black */
+  --primary-foreground: oklch(1 0 0);
+  /* White */
+  --secondary: oklch(0.95 0 0);
+  /* Light Grey */
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.9 0 0);
+  /* Grey */
+  --muted-foreground: oklch(0.3 0 0);
+  /* Dark Grey */
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0 0 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  /* Black borders */
+  --input: oklch(0 0 0);
+  --ring: oklch(0 0 0);
+  --radius: 0rem;
+  /* Sharp edges */
+}
+
+/* Force dark mode to also be black and white (no dark theme as per user request "white and black sketchy theme everywhere") */
+.dark {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.9 0 0);
+  --muted-foreground: oklch(0.3 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0 0 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  --input: oklch(0 0 0);
+  --ring: oklch(0 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Optional paper texture overlay for sketchy feel */
+    background-image: radial-gradient(#d5d5d5 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Neo-brutalist / Sketchy overrides for Shadcn components */
+@layer components {
+
+  /* Buttons */
+  button,
+  .inline-flex.items-center.justify-center.whitespace-nowrap.rounded-md {
+    border: 2px solid black !important;
+    box-shadow: 4px 4px 0px 0px black !important;
+    transition: all 0.1s ease-in-out !important;
+  }
+
+  button:hover:not(:disabled),
+  .inline-flex.items-center.justify-center.whitespace-nowrap.rounded-md:hover:not(:disabled) {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0px 0px black !important;
+    background-color: white !important;
+    color: black !important;
+  }
+
+  button:active:not(:disabled),
+  .inline-flex.items-center.justify-center.whitespace-nowrap.rounded-md:active:not(:disabled) {
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0px 0px 0px 0px black !important;
+  }
+
+  /* Cards */
+  .rounded-xl,
+  .rounded-lg,
+  .bg-card,
+  [data-v0-t="card"],
+  .card-wrapper {
+    border: 3px solid black !important;
+    box-shadow: 6px 6px 0px 0px black !important;
+    border-radius: 0px !important;
+  }
+
+  /* Inputs */
+  input,
+  textarea,
+  select {
+    border: 3px solid black !important;
+    box-shadow: 4px 4px 0px 0px black !important;
+    border-radius: 0px !important;
+    transition: all 0.1s ease-in-out !important;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0px 0px black !important;
+    outline: none !important;
+    border-color: black !important;
+  }
+
+  /* Exclude elements from having shadows */
+  .container,
+  nav,
+  footer,
+  .grid,
+  .flex,
+  form,
+  main {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  nav.border-b,
+  footer.border-t {
+    border-color: black !important;
+    border-bottom-width: 3px !important;
+    border-top-width: 3px !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+  }
+}

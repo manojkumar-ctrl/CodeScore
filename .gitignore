@@ -1,0 +1,40 @@
+
+# ─── SECREt ───────────────────────────
+.env
+.env.local
+.env*.local
+*.env
+
+# ─── OS Files ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE & Editor ───────────────────────────────────────────
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# ─── Java / Maven (Backend) ─────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+.mvn/wrapper/maven-wrapper.jar
+
+# ─── Node / Next.js (Frontend) ──────────────────────────────
+node_modules/
+.next/
+out/
+build/
+npm-debug.log*
+yarn-error.log*
+
+# ─── Docker ─────────────────────────────────────────────────
+# (docker-compose.yml is safe to commit — it has no secrets)
+
+# ─── Misc ───────────────────────────────────────────────────
+*.pem
+*.log

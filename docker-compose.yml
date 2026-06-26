@@ -1,0 +1,46 @@
+services:
+  redis:
+    image: redis:7-alpine          # Lightweight official Redis image (~30MB)
+    container_name: coderank-redis
+    ports:
+      - "6379:6379"                # Expose to host so you can inspect via redis-cli
+    restart: unless-stopped
+    networks:
+      - coderank-net
+
+  backend:
+    build:
+      context: ./coderank-backend
+    container_name: coderank-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./coderank-backend/.env
+    environment:
+      # Override .env values for Docker networking.
+      # Inside Docker Compose, 'redis' resolves to the Redis container via built-in DNS.
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - coderank-net
+
+  frontend:
+    build:
+      context: ./client-coderank
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8080/api
+    container_name: coderank-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - coderank-net
+
+networks:
+  coderank-net:
+    driver: bridge
